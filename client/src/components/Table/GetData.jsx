@@ -1,26 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ShowData from "./ShowData";
+import "./GetData.css";
 
-export default function GetData() {
-  const [data, setData] = useState([]);
-  const [temp, setTemp] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    (function getData() {
-      setLoading(true);
-      fetch("https://radiant-atoll-24356.herokuapp.com/data")
-        .then((res) => res.json())
-        .then((data) => {
-          setLoading(false);
-          setData(data);
-          setTemp(data);
-          console.log(data);
-        })
-        .catch((err) => console.log(err.message));
-    })();
-  }, []);
-
+export default function GetData({ data, setData, temp, setTemp, loading }) {
   function sortIntensity(e) {
     let value = e.target.value;
     if (value === "lh") {
@@ -97,9 +79,12 @@ export default function GetData() {
 
   return (
     <div>
-      <div style={{ display: "flex", gap: "30px", margin: "50px" }}>
+      <div className="flex">
         <div>
-          <label for="topics-filters">Topics</label>
+          <h3>Filter By :-</h3>
+        </div>
+        <div>
+          <label>Topics</label>
           <select onChange={handleTopics}>
             <option value="Default">Default</option>
             <option value="gas">Gas</option>
@@ -110,7 +95,7 @@ export default function GetData() {
           </select>
         </div>
         <div>
-          <label for="sector-filters">Sector</label>
+          <label>Sector</label>
           <select onChange={handleSector}>
             <option value="Default">Default</option>
             <option value="Energy">Energy</option>
@@ -120,7 +105,7 @@ export default function GetData() {
           </select>
         </div>
         <div>
-          <label for="region-filters">Region</label>
+          <label>Region</label>
           <select onChange={handleRegion}>
             <option value="Default">Default</option>
             <option value="World">World</option>
@@ -131,7 +116,7 @@ export default function GetData() {
           </select>
         </div>
         <div>
-          <label for="topics-filters">Pestle</label>
+          <label>Pestle</label>
           <select onChange={handlePestle}>
             <option value="Default">Default</option>
             <option value="Industries">Industries</option>
@@ -159,9 +144,11 @@ export default function GetData() {
         </div>
       </div>
       {loading ? (
-        <h1>Loading.....</h1>
+        <div className="head">
+          <h2>Loading....</h2>
+        </div>
       ) : (
-        <table style={{ marginLeft: 20 }}>
+        <table>
           <thead>
             <tr>
               <th>Title</th>

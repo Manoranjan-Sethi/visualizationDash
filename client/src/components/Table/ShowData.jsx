@@ -1,11 +1,12 @@
 import React from "react";
+import "./GetData.css";
 
 function ShowData({ res }) {
   function truncate(str, n) {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
   }
   return (
-    <tr style={{ textAlign: "center" }}>
+    <tr>
       <td>{truncate(res?.title, 20)}</td>
       <td>{res.topic}</td>
       <td>{res.added}</td>

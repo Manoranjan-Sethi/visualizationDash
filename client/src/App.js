@@ -11,45 +11,39 @@ import GetData from "./components/Table/GetData";
 // import { users } from "./bd.js";
 
 function App() {
-  const [adata, setData] = useState([]);
+  const [data, setData] = useState([]);
+  const [temp, setTemp] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    async function getData() {
-      let res = await fetch("https://radiant-atoll-24356.herokuapp.com/data");
-      let data = await res.json();
-      setData(data);
-      // console.log(data);
-    }
-    getData();
+    (function getData(data) {
+      setLoading(true);
+      fetch("https://radiant-atoll-24356.herokuapp.com/data")
+        .then((res) => res.json())
+        .then((data) => {
+          setLoading(false);
+          setData(data);
+          setTemp(data);
+          // console.log(data);
+        })
+        .catch((err) => console.log(err.message));
+    })();
   }, []);
-
-  const [intense, setIntense] = useState({
-    labels: adata.map((e) => e.intensity && e.intensity),
-    datasets: [
-      {
-        label: "Intensity",
-        data: adata.map((e) => e.topic && e.topic),
-        backgroundColor: [
-          "rgba(75,192,195,1)",
-          "#ecf0f1",
-          "#50AF95",
-          "#f3ba2f",
-          "#2a71d0",
-        ],
-        borderColor: "black",
-        borderWidth: 1.5,
-      },
-    ],
-  });
 
   return (
     <div className="App">
       <Navbar />
-      <GetData />
+      {<BarChart data={data} />}
+      <GetData
+        data={data}
+        setData={setData}
+        temp={temp}
+        setTemp={setTemp}
+        loading={loading}
+      />
       {/* <ShowData /> */}
       {/* <Fetch /> */}
 
-      {/* <BarChart chartData={intense} /> */}
       {/* <LineChart LineData={intense} />
       <PieChart PieData={intense} /> */}
     </div>

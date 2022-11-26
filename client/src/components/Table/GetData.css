@@ -1,0 +1,38 @@
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  margin: 50px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+label {
+  margin-right: 5px;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: gray;
+  color: white;
+}
+
+tr {
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+  background-color: #d6eeee;
+}
