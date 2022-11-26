@@ -39,3 +39,8 @@ img {
   width: 20%;
   padding-left: 80%;
 }
+
+h1 {
+  color: #67b02d;
+  margin-top: -5px;
+}
